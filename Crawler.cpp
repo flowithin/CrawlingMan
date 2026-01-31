@@ -28,6 +28,10 @@ std::string GetWork() {
 
 void AddWork(std::string &url) {
   pthread_mutex_lock(&mutex_paths);
+  if (url.find("https://") == std::string::npos) {
+    pthread_mutex_unlock(&mutex_paths);
+    return;
+  }
   urls.push_back(url);
   pthread_cond_signal(&cond);
   pthread_mutex_unlock(&mutex_paths);
@@ -97,6 +101,7 @@ int main(int argc, char **argv) {
     pthread_join(threads[i], nullptr);
   }
 
+  // log:
   // while (!urls.empty() && documents.size() < numDocuments) {
   //   std::cout << "-------------------PARSING STARTED-------------------"
   //             << std::endl;
