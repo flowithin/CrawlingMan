@@ -36,6 +36,20 @@
 *.exe
 *.out
 *.app
+Crawler
+LinuxGetSsl
+
+
 
 # debug information files
+*.log
 *.dwo
+
+#text files
+*.txt
+
+
+
+#except list.txt
+!list.txt
+
